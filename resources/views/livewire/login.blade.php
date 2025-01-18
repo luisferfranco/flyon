@@ -38,54 +38,31 @@ class extends Component {
 }
 ?>
 
-
 <div class="p-20 mx-auto max-w-7xl">
   <form
     wire:submit.prevent="login"
-    class="card sm:max-w-sm"
+    class="mx-auto card sm:max-w-sm"
     >
 
     <div class="card-body">
       <div class="mb-2 card-title">Ingresar</div>
 
-      <div class="relative">
-        <input
-          type="text"
-          placeholder="juan.camaney@tango.com"
-          class="input input-floating peer @error('email') is-invalid @enderror"
-          wire:model="email"
-          />
-        <label
-          class="input-floating-label"
-          for="email"
-          >
-          Correo Electrónico
-        </label>
-        @error('email')
-          <span class="label">
-            <span class="label-text-alt">{{ $message }}</span>
-          </span>
-        @enderror
-      </div>
+      <x-input
+        type="text"
+        wire:model="email"
+        name="email"
+        placeholder="juan.camaney@tango.com"
+        label="Correo Electrónico"
+        />
 
-      <div class="relative mt-4">
-        <input
+      <div class="mt-2">
+        <x-input
           type="password"
-          placeholder="**********"
-          class="input input-floating peer @error('password') is-invalid @enderror"
           wire:model="password"
+          name="password"
+          placeholder="**********"
+          label="Contraseña"
           />
-        <label
-          class="input-floating-label"
-          for="password"
-          >
-          Password
-        </label>
-        @error('password')
-          <span class="label">
-            <span class="label-text-alt">{{ $message }}</span>
-          </span>
-        @enderror
       </div>
 
       <div class="flex justify-end mt-4 card-actions">

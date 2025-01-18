@@ -23,5 +23,7 @@
     </div>
   </div>
 
+  <x-inputz />
+
 </body>
 </html>
