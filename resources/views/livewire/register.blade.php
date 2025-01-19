@@ -7,7 +7,6 @@ use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Hash;
 
 new
-#[Layout('components.layouts.empty')]       // <-- The same `empty` layout
 #[Title('Login')]
 class extends Component {
   #[Rule('required')]
@@ -26,7 +25,7 @@ class extends Component {
   {
     // It is logged in
     if (auth()->user()) {
-      return redirect('/');
+      return $this->redirect('/dashboard');
     }
   }
 
@@ -48,17 +47,61 @@ class extends Component {
 } ?>
 
 <div class="mx-auto mt-20 md:w-96">
-  <div class="mb-10">Cool image here</div>
+  <form
+    wire:submit='register'
+    class="mx-auto card sm:max-w-sm"
+    >
 
-  <x-form wire:submit="register">
-    <x-input label="Name" wire:model="name" icon="o-user" inline />
-    <x-input label="E-mail" wire:model="email" icon="o-envelope" inline />
-    <x-input label="Password" wire:model="password" type="password" icon="o-key" inline />
-    <x-input label="Confirm Password" wire:model="password_confirmation" type="password" icon="o-key" inline />
+    <div class="card-body">
+      <x-input
+        type="text"
+        wire:model='name'
+        name="name"
+        label="Nombre"
+        placeholder="Juan Camaney"
+        />
 
-    <x-slot:actions>
-      <x-button label="Already registered?" class="btn-ghost" link="/login" />
-      <x-button label="Register" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="register" />
-    </x-slot:actions>
-  </x-form>
+      <div class="mt-2">
+        <x-input
+          type="text"
+          wire:model='email'
+          name="email"
+          label="Correo Electrónico"
+          placeholder="juan.camaney@tango.com"
+          />
+      </div>
+
+      <div class="mt-2">
+        <x-input
+          type="password"
+          wire:model='password'
+          name="password"
+          label="Contraseña"
+          placeholder="**********"
+          />
+      </div>
+
+      <div class="mt-2">
+        <x-input
+          type="password"
+          wire:model='password_confirmation'
+          name="password_confirmation"
+          label="Confirmar Contraseña"
+          placeholder="**********"
+          />
+      </div>
+
+      <div class="flex justify-end mt-4 card-actions">
+        <button type="submit" class="btn btn-primary btn-gradient">Registrarme</button>
+        <a href="/login"
+          class="btn btn-secondary btn-text"
+          wire:navigate
+          >
+          Ya tengo cuenta
+        </a>
+      </div>
+    </div>
+
+  </form>
+
 </div>

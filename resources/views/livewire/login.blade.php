@@ -5,7 +5,6 @@ use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
 new
-#[Layout('components.layouts.empty')]       // <-- Here is the `empty` layout
 #[Title('Login')]
 class extends Component {
 
@@ -19,18 +18,17 @@ class extends Component {
   {
     // It is logged in
     if (auth()->user()) {
-      return redirect('/');
+      return $this->redirect('/dashboard');
     }
   }
 
   public function login() {
     $credentials = $this->validate();
-    info($credentials);
 
     if (auth()->attempt($credentials)) {
       request()->session()->regenerate();
 
-      return redirect()->intended('/');
+      return $this->redirectIntended('/dashboard');
     }
 
     $this->addError('email', 'Las credenciales no existen en nuestros registros');
@@ -41,7 +39,7 @@ class extends Component {
 <div class="p-20 mx-auto max-w-7xl">
   <form
     wire:submit.prevent="login"
-    class="mx-auto card sm:max-w-sm"
+    class="mx-auto shadow-lg card sm:max-w-sm"
     >
 
     <div class="card-body">

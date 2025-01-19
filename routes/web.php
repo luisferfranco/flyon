@@ -3,9 +3,7 @@
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-  return view('welcome');
-});
+Volt::route('/', 'index');
 Route::get('/ui', function () {
   return view('ui');
 });
@@ -13,19 +11,19 @@ Route::get('/ui', function () {
 // Login/Logout/Register
 Volt::route('/login', 'login')->name('login');
 Route::get('/logout', function () {
-    auth()->logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
+  auth()->logout();
+  request()->session()->invalidate();
+  request()->session()->regenerateToken();
 
-    return redirect('/');
-});
-Volt::route('/register', 'register');
+  return redirect('/');
+})->name('logout');
+Volt::route('/register', 'register')->name('register');
 
 // Protected routes here
 Route::middleware('auth')->group(function () {
-    Volt::route('/', 'index');
-    Volt::route('/users', 'users.index');
-    Volt::route('/users/create', 'users.create');
-    Volt::route('/users/{user}/edit', 'users.edit');
-    // ... more
+  Volt::route('/dashboard', 'dashboard')->name('dashboard');
+  Volt::route('/users', 'users.index');
+  Volt::route('/users/create', 'users.create');
+  Volt::route('/users/{user}/edit', 'users.edit');
+  // ... more
 });
