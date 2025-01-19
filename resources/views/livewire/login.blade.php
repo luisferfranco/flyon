@@ -14,6 +14,8 @@ class extends Component {
   #[Rule('required')]
   public string $password = '';
 
+  public $rememberMe = true;
+
   public function mount()
   {
     // It is logged in
@@ -25,7 +27,7 @@ class extends Component {
   public function login() {
     $credentials = $this->validate();
 
-    if (auth()->attempt($credentials)) {
+    if (auth()->attempt($credentials, $this->rememberMe)) {
       request()->session()->regenerate();
 
       return $this->redirectIntended('/dashboard');
@@ -61,6 +63,22 @@ class extends Component {
           placeholder="**********"
           label="Contraseña"
           />
+      </div>
+
+      <div class="mt-2">
+
+        <div class="flex gap-2">
+          <input
+            type="checkbox"
+            class="checkbox checkbox-primary"
+            wire:model='rememberMe'
+            />
+          <label class="flex-col items-start pt-0 -mt-1 cursor-pointer label">
+            <span class="text-base label-text">Recordarme</span>
+            <span class="label-text-alt">Recordar mi usuario y contraseña</span>
+          </label>
+        </div>
+
       </div>
 
       <div class="flex justify-end mt-4 card-actions">
