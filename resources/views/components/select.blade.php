@@ -2,7 +2,7 @@
 
 <div class="relative w-full">
   <select
-    class="select select-floating"
+    {{ $attributes->merge(['class' => 'select select-floating peer']) }}
     aria-label="Select floating label"
     >
     <option>Selecciona...</option>
