@@ -79,6 +79,7 @@ new class extends Component {
     <x-select
       :options="$proyectos"
       wire:model.live='proyecto_id'
+      name="proyecto_id"
       label="Selecciona el Proyecto"
       />
     <x-button

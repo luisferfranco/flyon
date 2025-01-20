@@ -31,4 +31,10 @@ class User extends Authenticatable
   public function proyectos() {
     return $this->hasMany(Proyecto::class, 'admin_id');
   }
+  public function tareas() {
+    return $this->hasMany(Tarea::class, 'user_id');
+  }
+  public function tareasAsignadas() {
+    return $this->hasMany(Tarea::class, 'asignado_id');
+  }
 }

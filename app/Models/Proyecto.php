@@ -13,4 +13,7 @@ class Proyecto extends Model
   public function admin() {
     return $this->belongsTo(User::class, 'admin_id');
   }
+  public function tareas() {
+    return $this->hasMany(Tarea::class, 'proyecto_id');
+  }
 }
