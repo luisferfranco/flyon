@@ -1,4 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
+const { addDynamicIconSelectors } = require("@iconify/tailwind")
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,6 +10,7 @@ export default {
     './resources/**/*.js',
     './resources/**/*.vue',
     './node_modules/flyonui/dist/js/*.js',
+    './src/*.html'
   ],
   theme: {
     extend: {
@@ -19,6 +21,7 @@ export default {
   },
   plugins: [
     require('flyonui'),
-    require('flyonui/plugin')
+    require('flyonui/plugin'),
+    addDynamicIconSelectors()
   ],
 };

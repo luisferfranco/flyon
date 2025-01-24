@@ -256,12 +256,14 @@ new class extends Component {
                     <th>{{ $tarea->id }}</th>
 
                     {{-- Asunto/Descripción --}}
-                      <td class="max-w-96">
+                    <td class="max-w-96">
                       <div>
                         @for ($i = 0; $i < $tarea->nivel; $i++)
                           &nbsp;&nbsp;&nbsp;&nbsp;
                         @endfor
-                        <span class="font-bold text-primary">{{ $tarea->asunto }}</span>
+                        <a href="{{ route('tarea.show', $tarea->id) }}">
+                          <span class="font-bold text-primary">{{ $tarea->asunto }}</span>
+                        </a>
                       </div>
                     </td>
 
