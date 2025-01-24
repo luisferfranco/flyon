@@ -37,4 +37,8 @@ class Tarea extends Model
   public function tareas() {
     return $this->hasMany(Tarea::class, 'tarea_padre_id');
   }
+
+  public function acciones() {
+    return $this->hasMany(Accion::class);
+  }
 }

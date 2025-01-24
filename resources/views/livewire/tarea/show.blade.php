@@ -7,6 +7,9 @@ new class extends Component {
   public Tarea $tarea;
   public $tareas = [];
 
+  public $isEditing = false;
+  public $accion;
+
   public $estados=[
     'PEND' => 'Pendiente',
     'ENPR' => 'En Proceso',
@@ -40,6 +43,33 @@ new class extends Component {
     }
 
     return $resultado;
+  }
+
+  public function crearAccion() {
+    $this->isEditing = true;
+  }
+
+  public function guardar()
+  {
+    $this->validate([
+      'accion' => 'required'
+    ]);
+
+    $this->tarea->acciones()->create([
+      'descripcion' => $this->accion,
+      'user_id'     => auth()->id()
+    ]);
+
+    $this->accion     = '';
+    $this->isEditing  = false;
+
+    $this->tarea->refresh();
+  }
+
+  public function cancelarAccion()
+  {
+    $this->accion = '';
+    $this->isEditing = false;
   }
 }; ?>
 
@@ -129,17 +159,17 @@ new class extends Component {
                 </tr>
               </thead>
               <tbody>
-                @foreach ($tareas as $tarea)
+                @foreach ($tareas as $t)
                   <tr class="hover">
-                    <th>{{ $tarea->id }}</th>
+                    <th>{{ $t->id }}</th>
 
                     {{-- Asunto/Descripción --}}
                     <td class="max-w-96">
                       <div>
-                        @for ($i = 0; $i < $tarea->nivel; $i++)
+                        @for ($i = 0; $i < $t->nivel; $i++)
                           &nbsp;&nbsp;&nbsp;&nbsp;
                         @endfor
-                        <span class="font-bold text-primary">{{ $tarea->asunto }}</span>
+                        <span class="font-bold text-primary">{{ $t->asunto }}</span>
                       </div>
                     </td>
 
@@ -153,9 +183,9 @@ new class extends Component {
                           'RECH' => 'badge-danger',
                           'CERR' => 'badge-secondary',
                         ];
-                        $color = $estadoColors[$tarea->estado] ?? 'badge-light';
+                        $color = $estadoColors[$t->estado] ?? 'badge-light';
                       @endphp
-                      <span class="badge {{ $color }}">{{ $tarea->estado }}</span>
+                      <span class="badge {{ $color }}">{{ $t->estado }}</span>
                     </td>
 
                     {{-- Prioridad --}}
@@ -167,16 +197,16 @@ new class extends Component {
                           'NORM' => 'badge-info',
                           'BAJA' => 'badge-secondary',
                         ];
-                        $color = $prioridadColors[$tarea->prioridad] ?? 'badge-light';
+                        $color = $prioridadColors[$t->prioridad] ?? 'badge-light';
                       @endphp
-                      <span class="badge {{ $color }}">{{ $tarea->prioridad }}</span>
+                      <span class="badge {{ $color }}">{{ $t->prioridad }}</span>
                     </td>
 
                     {{-- Asignado --}}
-                    <td>{{ $tarea->asignado->name ?? null }}</td>
+                    <td>{{ $t->asignado->name ?? null }}</td>
 
                     {{-- Fecha Compromiso --}}
-                    <td>{{ $tarea->fecha_compromiso }}</td>
+                    <td>{{ $t->fecha_compromiso }}</td>
 
                     {{-- Acciones --}}
                     <td class="align-right">
@@ -215,6 +245,65 @@ new class extends Component {
             </table>
           </div>
       @endif
+
+      {{-- Acciones --}}
+      <div x-data="{ isEditing: $wire.entangle('isEditing') }" class="my-6">
+        <div x-show="!isEditing">
+          <x-button value="Nueva Acción"
+            class="btn btn-primary"
+            icon="icon-[tabler--circle-plus-filled]"
+            wire:click="crearAccion"
+            />
+        </div>
+
+        <div x-show="isEditing">
+          <form x-show="isEditing"
+            class="mt-2"
+            wire:submit.prevent="guardar"
+            x-cloak
+            >
+            <x-textarea
+              label="Acción"
+              wire:model="accion"
+              name="accion"
+              rows="10"
+              />
+            <div class="mt-4">
+              <x-button
+                type="submit"
+                class="btn btn-primary"
+                icon="icon-[tabler--check]"
+                value="Guardar Tarea"
+                wire:click="guardar"
+                />
+              <x-button
+                type="button"
+                class="btn btn-primary"
+                icon="icon-[tabler--x]"
+                value="Cancelar"
+                wire:click="cancelar"
+                />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      @if ($tarea->acciones->count() > 0)
+        @foreach ($tarea->acciones as $accion)
+          <div class="mb-4 overflow-hidden border shadow-md rounded-xl border-neutral bg-base-200">
+            <div class="px-6 py-2 bg-base-300">
+              Actualizado por {{ $accion->user->name }} el {{ $accion->created_at->format('Y/m/d') }}
+            </div>
+            <div class="px-6 py-2 markdown">{!! Str::of($accion->descripcion)->markdown() !!}</div>
+          </div>
+        @endforeach
+      @else
+        <div class="flex items-center space-x-1">
+          <span class="text-warning icon-[tabler--alert-triangle-filled]"></span>
+          <span>No hay acciones registradas.</span>
+        </div>
+      @endif
+
 
     </div>
   </w-full>

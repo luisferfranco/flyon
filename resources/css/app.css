@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown h1 {
+  @apply text-4xl font-bold;
+}
+.markdown h2 {
+  @apply text-3xl font-bold;
+}
+.markdown h3 {
+  @apply text-2xl font-bold;
+}
+.markdown li {
+  @apply list-disc list-inside;
+}
