@@ -17,6 +17,9 @@ class Tarea extends Model
     'fecha_compromiso',
     'tarea_padre_id',
   ];
+  protected $casts = [
+    'fecha_compromiso' => 'date',
+  ];
 
   public function proyecto() {
     return $this->belongsTo(Proyecto::class);

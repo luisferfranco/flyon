@@ -304,7 +304,11 @@ new class extends Component {
               <td>{{ $tarea->asignado->name ?? null }}</td>
 
               {{-- Fecha Compromiso --}}
-              <td>{{ $tarea->fecha_compromiso }}</td>
+              <td>
+                @if ($tarea->fecha_compromiso)
+                  {{ $tarea->fecha_compromiso->format('Y/m/d') }}
+                @endif
+              </td>
 
               {{-- Acciones --}}
               <td class="align-right">
