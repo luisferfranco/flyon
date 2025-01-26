@@ -81,7 +81,6 @@
                 <span class="icon-[tabler--pencil]"></span>
               </a>
               <a
-                href="{{ route('tarea.create') }}"
                 class="font-bold btn btn-primary btn-xs"
                 wire:navigate
                 >

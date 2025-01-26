@@ -19,9 +19,11 @@ new class extends Component {
   public $stub;
   public $nombreBoton;
 
+  public $pid;
+
   public function mount() {
     $this->proyectos    = Proyecto::orderBy('id')->get();
-    $this->proyecto_id  = null;
+    $this->proyecto_id  = $this->pid;
   }
 
   public function crearProyecto() {

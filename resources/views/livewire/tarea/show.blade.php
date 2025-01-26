@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Tarea;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -49,6 +50,12 @@ new class extends Component {
     $this->tarea->delete();
     return redirect()->route('dashboard');
   }
+
+  #[On('tarea-actualizada')]
+  public function tareaActualizada() {
+    $this->tarea->refresh();
+    $this->redirect(route('tarea.show', $this->tarea));
+  }
 }; ?>
 
 <div class="w-full shadow-xl card">
@@ -88,7 +95,7 @@ new class extends Component {
 
       <section x-show="isEditing">
         <h1 class="text-xl tracking-wide">TAREA #{{ $tarea->id }}</h1>
-        <livewire:tarea.edit :tarea="$tarea" />
+        <livewire:tarea.formulario :tarea="$tarea" />
       </section>
 
       {{-- Información general de la tarea --}}

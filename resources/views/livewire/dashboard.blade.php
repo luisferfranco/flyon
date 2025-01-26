@@ -8,19 +8,17 @@ use Livewire\Volt\Component;
 
 new class extends Component {
   public $proyecto_id;
-  public $tareas;
+  public $tareas      = [];
 
-  public function mount() {
-    $this->proyecto_id = null;
+  public function mount($proyecto = null) {
+    $this->proyecto_id = $proyecto ? Proyecto::find($proyecto)->id : 1;
     $this->tareas = null;
     $this->cargaTareas();
   }
 
   #[On('proyecto-seleccionado')]
   public function cambiaProyecto($value) {
-    $this->proyecto_id = $value > 0 ? $value : null;
-    $this->tareas = null;
-    $this->cargaTareas();
+    $this->redirectRoute('dashboard', ['proyecto' => $value]);
   }
 
   public function cargaTareas($parent_id = null, $nivel = 0) {
@@ -43,7 +41,16 @@ new class extends Component {
     <div class="card-body">
       <h1 class="mb-6 text-xl font-extrabold tracking-wide">DASHBOARD</h1>
 
-      <livewire:proyectos.proyecto-select />
+      <livewire:proyectos.proyecto-select :pid='$proyecto_id' />
+
+      <div>
+        <x-a
+          class="my-6 btn btn-primary"
+          href="{{ route('tarea.create', ['proyecto' => $proyecto_id]) }}"
+          value="Crear Tarea"
+          icon="icon-[tabler--subtask]"
+          />
+      </div>
 
       @if ($tareas)
         <x-tabla-tareas :tareas="$tareas" />

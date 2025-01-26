@@ -1,11 +1,12 @@
-@props(['name', 'options', 'label' => null, 'key' => 'id', 'value' => 'nombre'])
+@props(['name', 'options', 'label' => null, 'key' => 'id', 'value' => 'nombre', 'disabled' => false])
 
 <div class="relative w-full">
   <select
+    @if ($disabled) disabled @endif
     {{ $attributes->merge(['class' => 'select select-floating peer' . ($errors->has($name) ? ' is-invalid' : '')]) }}
     aria-label="Select floating label"
     >
-    <option value="0">Selecciona...</option>
+    <option disabled>Selecciona...</option>
     @foreach ($options as $option)
       <option value="{{ $option[$key] }}">{{ $option[$value] }}</option>
     @endforeach
