@@ -9,14 +9,14 @@
   ];
 @endphp
 
-<div class="card">
+<div class="rounded-none shadow-lg md:rounded-lg card">
   <div class="card-body">
     @if ($title)
       <div class="mb-2 card-title">{{ $title }}</div>
     @endif
 
     <div class="overflow-x-auto h-96">
-      <table class="table table-pin-rows table-pin-cols">
+      <table class="table-xs md:table table-pin-rows table-pin-cols">
         <thead>
           <tr>
             <th></th>
@@ -29,11 +29,12 @@
         <tbody>
           @foreach ($tareas as $tarea)
             <tr class="hover">
-              <th>{{ $tarea->id }}</th>
+              <th class="py-4 md:py-1">{{ $tarea->id }}</th>
               <td>
                 <a
                   href="{{ route('tarea.show', $tarea->id) }}"
                   class="link link-accent"
+                  wire:navigate
                   >
                   {{ $tarea->asunto }}
                 </a>
@@ -49,7 +50,8 @@
                   ];
                   $color = $estadoColors[$tarea->estado] ?? 'badge-light';
                 @endphp
-                <span class="badge {{ $color }}">{{ $tarea->estado }}</span>
+                <div class="hidden md:flex badge {{ $color }}">{{ $tarea->estado }}</div>
+                <div class="flex md:hidden badge {{ $color }} badge-xs">{{ $tarea->estado }}</div>
               </td>
               <td>
                 {{ \Carbon\Carbon::parse($tarea->fecha_compromiso)->format('Y/m/d') }}
