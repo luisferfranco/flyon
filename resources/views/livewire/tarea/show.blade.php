@@ -61,7 +61,7 @@ new class extends Component {
       >
 
       {{-- Sección para confirmar eliminación --}}
-      <section x-show="confirm">
+      <section x-show="confirm" x-cloak>
         <div class="w-full mb-6 border shadow-xl card bg-base-200 glass border-neutral">
           <div class="card-body">
             <p class="mb-2 card-title">¿Estás seguro de querer eliminar esta tarea?</p>
@@ -93,7 +93,7 @@ new class extends Component {
       </section>
 
       {{-- Información general de la tarea --}}
-      <section x-show="!isEditing">
+      <section x-show="!isEditing" x-cloak>
         <div class="flex justify-between">
           <h1 class="text-xl tracking-wide">TAREA #{{ $tarea->id }}</h1>
           <div class="flex items-center space-x-2" x-show="!confirm">
@@ -182,17 +182,17 @@ new class extends Component {
         @endif
       </section>
 
+      {{-- Despliegue de subtareas --}}
+      @if ($tareas)
+        <h2 class="mt-6 text-xl font-bold">Subtareas</h2>
+        <x-tabla-tareas :tareas="$tareas" />
+      @endif
+
+      {{-- Crear y mostrar Acciones --}}
+      <div class="mt-6">
+        <livewire:accion.index :tarea="$tarea" />
+      </div>
     </div>
 
-    {{-- Despliegue de subtareas --}}
-    @if ($tareas)
-      <h2 class="mt-6 text-xl font-bold">Subtareas</h2>
-      <x-tabla-tareas :tareas="$tareas" />
-    @endif
-
-    {{-- Crear y mostrar Acciones --}}
-    <div class="mt-6">
-      <livewire:accion.index :tarea="$tarea" />
-    </div>
   </div>
 </div>

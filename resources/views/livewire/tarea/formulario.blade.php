@@ -110,7 +110,13 @@ new class extends Component {
   }
 
   public function cancelar() {
-    $this->redirectRoute($this->url_previa, ['proyecto' => $this->proyecto], navigate: true);
+    info('formulario', ['proyecto' => $this->proyecto, 'tarea' => $this->tarea]);
+
+    if ($this->proyecto !== null) {
+      $this->redirectRoute($this->url_previa, ['proyecto' => $this->proyecto], navigate: true);
+    } else {
+      $this->redirectRoute($this->url_previa, ['tarea' => $this->tarea], navigate: true);
+    }
   }
 
 }; ?>
