@@ -36,6 +36,7 @@ new class extends Component {
   public Tarea $tarea;
 
   public function mount() {
+    info($tarea);
     $this->users            = User::orderBy('name')->get();
     $this->proyectos        = Proyecto::orderBy('nombre')->get();
 
@@ -69,8 +70,6 @@ new class extends Component {
     ]);
 
     $this->actualizarProyectoId($this->tarea, $this->proyecto_id);
-    info('aquí');
-    // return redirectRoute('tarea.show', $this->tarea->id);
   }
 
   public function actualizarProyectoId($tarea, $nuevoProyectoId) {
@@ -88,7 +87,6 @@ new class extends Component {
   class="mt-2"
   wire:submit.prevent="guardar"
   >
-  [[Aquí]]
   <div class="flex flex-col mt-4 space-y-4">
     <x-select
       :options="$proyectos"

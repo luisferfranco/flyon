@@ -50,6 +50,7 @@ new class extends Component {
       $this->prioridad_id     = $this->tarea->prioridad;
       $this->asignado_id      = $this->tarea->asignado_id;
       $this->fecha_compromiso = $this->tarea->fecha_compromiso;
+      $this->tarea_padre_id   = $this->tarea->tarea_padre_id;
     } else if ($padre !== null) {
       $this->tarea          = new Tarea();
       $this->proyecto_id    = $padre->proyecto_id;
