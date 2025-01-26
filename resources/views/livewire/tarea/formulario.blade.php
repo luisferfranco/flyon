@@ -87,7 +87,16 @@ new class extends Component {
 
     // Actualizar proyecto_id de las subtareas de forma recursiva
     $this->actualizarProyectoId($this->tarea, $this->proyecto_id);
-    $this->redirectRoute($this->url_previa, ['proyecto' => $this->proyecto], navigate: true);
+
+    if ($this->tarea == new Tarea()) {
+      // Si la tarea es nueva, viene de un proyecto, hay que redirigir a la vista de proyecto
+      $this->redirectRoute($this->url_previa, ['proyecto' => $this->proyecto], navigate: true);
+    } else {
+      // Si la tarea existe, es una edición de una tarea, hay que redirigir a la vista de la tarea
+      $this->redirectRoute($this->url_previa, ['tarea' => $this->tarea], navigate: true);
+    }
+
+
   }
 
   public function actualizarProyectoId($tarea, $nuevoProyectoId) {

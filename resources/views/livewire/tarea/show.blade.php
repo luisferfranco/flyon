@@ -50,12 +50,6 @@ new class extends Component {
     $this->tarea->delete();
     return redirect()->route('dashboard');
   }
-
-  #[On('tarea-actualizada')]
-  public function tareaActualizada() {
-    $this->tarea->refresh();
-    $this->redirect(route('tarea.show', $this->tarea));
-  }
 }; ?>
 
 <div class="w-full shadow-xl card">
