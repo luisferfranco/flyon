@@ -9,7 +9,7 @@
   <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-screen bg-base-300">
+<body class="min-h-screen bg-base-300">
 
   {{-- Navbar --}}
   <nav class="gap-4 mb-6 shadow-lg navbar bg-base-100">
