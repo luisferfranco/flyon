@@ -7,14 +7,14 @@ use Livewire\Volt\Component;
 
 new class extends Component {
   // Campos del formulario
-  public $proyecto_id;
-  public $asunto;
-  public $descripcion;
-  public $prioridad_id;
-  public $estado_id;
-  public $asignado_id;
-  public $fecha_compromiso;
-  public $tarea_padre_id;
+  public $proyecto_id       = null;
+  public $asunto            = null;
+  public $descripcion       = null;
+  public $prioridad_id      = null;
+  public $estado_id         = null;
+  public $asignado_id       = null;
+  public $fecha_compromiso  = null;
+  public $tarea_padre_id    = null;
 
   // Valores de los select
   public $opcionesEstado=[
@@ -148,6 +148,7 @@ new class extends Component {
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <x-select
         :options="$opcionesPrioridad"
+        nullable
         wire:model="prioridad_id"
         name="prioridad_id"
         label="Prioridad"
@@ -155,6 +156,7 @@ new class extends Component {
       <x-select
         :options="$opcionesEstado"
         wire:model="estado_id"
+        nullable
         name="estado_id"
         label="Estado"
         />
@@ -162,6 +164,7 @@ new class extends Component {
         :options="$users"
         value="name"
         wire:model="asignado_id"
+        nullable
         name="asignado_id"
         label="Asignada a"
         />
