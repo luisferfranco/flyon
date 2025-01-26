@@ -81,6 +81,7 @@
                 <span class="icon-[tabler--pencil]"></span>
               </a>
               <a
+                href="{{ route('tarea.create', ['padre' => $tarea]) }}"
                 class="font-bold btn btn-primary btn-xs"
                 wire:navigate
                 >

@@ -34,13 +34,14 @@ new class extends Component {
   public $proyectos;
   public $proyecto;
   public $tarea;
+  public $padre;
   public $url_previa;
 
-  public function mount(Proyecto $proyecto, Tarea $tarea = null) {
+  public function mount($proyecto = null, $tarea = null, $padre = null) {
     $this->proyecto = $proyecto;
     $this->url_previa = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
 
-    if ($tarea != new Tarea()) {
+    if ($tarea !== null) {
       $this->tarea            = $tarea;
       $this->proyecto_id      = $this->tarea->proyecto_id;
       $this->asunto           = $this->tarea->asunto;
@@ -49,9 +50,14 @@ new class extends Component {
       $this->prioridad_id     = $this->tarea->prioridad;
       $this->asignado_id      = $this->tarea->asignado_id;
       $this->fecha_compromiso = $this->tarea->fecha_compromiso;
-    } else {
-      $this->tarea = new Tarea();
-      $this->proyecto_id = $proyecto->id;
+    } else if ($padre !== null) {
+      $this->tarea          = new Tarea();
+      $this->proyecto_id    = $padre->proyecto_id;
+      $this->tarea_padre_id = $padre->id;
+    } else if ($proyecto !== null) {
+      $this->tarea          = new Tarea();
+      $this->proyecto_id    = $proyecto->id;
+      $this->tarea_padre_id = null;
     }
 
     $this->users            = User::orderBy('name')->get();
@@ -75,6 +81,7 @@ new class extends Component {
     $this->tarea->estado            = $this->estado_id ?? 'PEND';
     $this->tarea->asignado_id       = $this->asignado_id;
     $this->tarea->fecha_compromiso  = $this->fecha_compromiso;
+    $this->tarea->tarea_padre_id    = $this->tarea_padre_id;
     $this->tarea->user_id           = auth()->id();
     $this->tarea->save();
 
@@ -103,13 +110,17 @@ new class extends Component {
   wire:submit.prevent="guardar"
   >
   <div class="flex flex-col mt-4 space-y-4">
-    <x-select
-      :options="$proyectos"
-      value="nombre"
-      wire:model.live="proyecto_id"
-      name="proyecto_id"
-      label="Asignada al Proyecto"
-      />
+    @if ($padre)
+      <p class="mb-6">Tarea Padre: <span class="font-bold text-accent">{{ $padre->asunto }}</span></p>
+    @else
+      <x-select
+        :options="$proyectos"
+        value="nombre"
+        wire:model.live="proyecto_id"
+        name="proyecto_id"
+        label="Asignada al Proyecto"
+        />
+    @endif
 
     <x-input
       wire:model="asunto"
@@ -170,5 +181,5 @@ new class extends Component {
         value="Cancelar"
         />
     </div>
-  </div>
+  </p>
 </form>
