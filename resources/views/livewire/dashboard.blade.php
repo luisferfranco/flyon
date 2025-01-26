@@ -45,7 +45,13 @@ new class extends Component {
 
       <livewire:proyectos.proyecto-select />
 
-      <x-tabla-tareas :tareas="$tareas" />
+      @if ($tareas)
+        <x-tabla-tareas :tareas="$tareas" />
+      @else
+        <div class="flex items-center justify-center h-64 max-w-5xl mx-auto">
+          <div class="alert alert-info" role="alert">No hay tareas en este proyecto</div>
+        </div>
+      @endif
 
     </div>
   </div>
