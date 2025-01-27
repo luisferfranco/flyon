@@ -15,7 +15,7 @@
       <div class="mb-2 card-title">{{ $title }}</div>
     @endif
 
-    <div class="overflow-x-auto h-96">
+    <div class="overflow-x-auto">
       <table class="table-xs md:table table-pin-rows table-pin-cols">
         <thead>
           <tr>

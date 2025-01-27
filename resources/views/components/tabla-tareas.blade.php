@@ -61,7 +61,17 @@
           </td>
 
           {{-- Asignado --}}
-          <td>{{ $tarea->asignado->name ?? null }}</td>
+          <td>
+            @if ($tarea->asignado)
+              <a
+                href="{{ route('user.show', $tarea->asignado->id) }}"
+                class="text-primary"
+                wire:navigate
+                >
+                {{ $tarea->asignado->name ?? null }}
+              </a>
+            @endif
+          </td>
 
           {{-- Fecha Compromiso --}}
           <td>
