@@ -103,38 +103,10 @@
 
 
   <div class="flex">
-    <aside class="w-56 h-screen shadow-xl bg-base-100">
-      <ul class="mt-4">
-        <a
-          href="{{ route('dashboard') }}"
-          wire:navigate
-          >
-          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
-            <span class="icon-[fluent-color--home-16]"></span>
-            Dashboard
-          </li>
-        </a>
-        <a href="#" wire:navigate>
-          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
-            <span class="icon-[fluent-color--molecule-16]"></span>
-            Proyectos
-          </li>
-        </a>
-        <a href="#" wire:navigate>
-          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
-            <span class="icon-[fluent-color--people-community-16]"></span>
-            Personal
-          </li>
-        </a>
-        <a href="#" wire:navigate>
-          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
-            <span class="icon-[fluent-color--calendar-16]"></span>
-            Calendario
-          </li>
-        </a>
-      </ul>
-    </aside>
+    {{-- Aside --}}
+    <x-aside-nav />
 
+    {{-- Main --}}
     <div class="w-full p-6 mx-auto max-w-7xl">
       {{ $slot }}
     </div>
