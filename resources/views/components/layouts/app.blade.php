@@ -126,6 +126,12 @@
             Personal
           </li>
         </a>
+        <a href="#" wire:navigate>
+          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
+            <span class="icon-[fluent-color--calendar-16]"></span>
+            Calendario
+          </li>
+        </a>
       </ul>
     </aside>
 
