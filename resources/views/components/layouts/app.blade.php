@@ -12,7 +12,7 @@
 <body class="min-h-screen bg-base-300">
 
   {{-- Navbar --}}
-  <nav class="gap-4 mb-6 shadow-lg navbar bg-base-100">
+  <nav class="gap-4 shadow-lg navbar bg-base-100">
 
     {{-- Logo --}}
     <div class="items-center navbar-start">
@@ -101,8 +101,37 @@
     </div>
   </nav>
 
-  <div class="mx-auto max-w-7xl">
-    {{ $slot }}
+
+  <div class="flex">
+    <aside class="w-56 h-screen shadow-xl bg-base-100">
+      <ul class="mt-4">
+        <a
+          href="{{ route('dashboard') }}"
+          wire:navigate
+          >
+          <li class="flex items-center gap-2 px-6 py-2 hover:bg-base-300">
+            <span class="icon-[tabler--home-filled]"></span>
+            Dashboard
+          </li>
+        </a>
+        <a href="#" wire:navigate>
+          <li class="flex items-center gap-2 px-6 py-2 hover:bg-base-300">
+            <span class="icon-[tabler--cap-projecting]"></span>
+            Proyectos
+          </li>
+        </a>
+        <a href="#" wire:navigate>
+          <li class="flex items-center gap-2 px-6 py-2 hover:bg-base-300">
+            <span class="icon-[tabler--users]"></span>
+            Personal
+          </li>
+        </a>
+      </ul>
+    </aside>
+
+    <div class="w-full p-6 mx-auto max-w-7xl">
+      {{ $slot }}
+    </div>
   </div>
 </body>
 </html>
