@@ -16,8 +16,8 @@
 
     {{-- Logo --}}
     <div class="items-center navbar-start">
-      <a class="text-xl font-semibold no-underline link text-base-content link-neutral" href="/">
-        Flyon
+      <a class="px-4 py-2 text-3xl font-bold tracking-wider no-underline rounded-lg link text-neutral link-neutral bg-warning" href="/">
+        SEMF
       </a>
     </div>
 
@@ -109,20 +109,20 @@
           href="{{ route('dashboard') }}"
           wire:navigate
           >
-          <li class="flex items-center gap-2 px-6 py-2 hover:bg-base-300">
-            <span class="icon-[tabler--home-filled]"></span>
+          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
+            <span class="icon-[fluent-color--home-16]"></span>
             Dashboard
           </li>
         </a>
         <a href="#" wire:navigate>
-          <li class="flex items-center gap-2 px-6 py-2 hover:bg-base-300">
-            <span class="icon-[tabler--cap-projecting]"></span>
+          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
+            <span class="icon-[fluent-color--molecule-16]"></span>
             Proyectos
           </li>
         </a>
         <a href="#" wire:navigate>
-          <li class="flex items-center gap-2 px-6 py-2 hover:bg-base-300">
-            <span class="icon-[tabler--users]"></span>
+          <li class="flex items-center gap-2 px-6 py-2 transition duration-300 hover:bg-primary hover:text-primary-content">
+            <span class="icon-[fluent-color--people-community-16]"></span>
             Personal
           </li>
         </a>
