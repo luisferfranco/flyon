@@ -23,7 +23,7 @@
   ];
 @endphp
 
-<aside class="w-56 h-screen shadow-xl bg-base-100">
+<aside class="w-56 h-full min-h-screen shadow-xl bg-base-100">
   <ul class="mt-4">
 
     @foreach ($opciones as $opcion)
