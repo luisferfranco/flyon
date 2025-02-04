@@ -11,7 +11,7 @@
       'text' => 'Proyectos',
     ],
     'personal' => [
-      'link' => '#',
+      'link' => route('users.index'),
       'icon' => 'icon-[fluent-color--people-community-16]',
       'text' => 'Personal',
     ],

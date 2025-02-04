@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
   Volt::route('/tarea/{tarea}', 'tarea.show')->name('tarea.show');
   Volt::route('/tarea/{tarea}/edit', 'tarea.show')->name('tarea.edit');
 
+  Volt::route('/users/', 'users.index')->name('users.index');
   Volt::route('/user/{user?}', 'users.show')->name('user.show');
 });
 
