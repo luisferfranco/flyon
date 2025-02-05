@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Proyecto extends Model
 {
   use SoftDeletes;
+
   protected $fillable = ['nombre', 'descripcion', 'stub', 'admin_id'];
 
   public function admin() {
