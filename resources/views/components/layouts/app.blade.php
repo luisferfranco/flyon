@@ -40,34 +40,22 @@
         {{-- Dropdown (Avatar del usuario) --}}
         <div class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
           <button id="dropdown-scrollable" type="button" class="flex items-center dropdown-toggle" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-            <div class="avatar">
-              <div class="size-9.5 rounded-full">
-                <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" alt="avatar 1" />
-              </div>
-            </div>
+            <x-avatar :user="auth()->user()" size="md" />
           </button>
           {{-- Opciones para el usuario --}}
           <ul class="hidden dropdown-menu dropdown-open:opacity-100 min-w-60" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-avatar">
 
             {{-- ID del Usuario --}}
             <li class="gap-2 dropdown-header">
-              <div class="avatar">
-                <div class="w-10 rounded-full">
-                  <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" alt="avatar" />
-                </div>
-              </div>
               <div>
                 <h6 class="text-base font-semibold text-base-content">{{ auth()->user()->name }}</h6>
                 <small class="text-base-content/50">{{ auth()->user()->email }}</small>
-              </div>
-              <div>
-                [[{{ auth()->user()->avatar }}]]
               </div>
             </li>
 
             {{-- Perfil --}}
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="{{ route('user.show') }}">
                 <span class="icon-[tabler--user]"></span>
                 Mi Perfil
               </a>

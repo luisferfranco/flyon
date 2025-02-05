@@ -43,14 +43,6 @@ new class extends Component {
     $this->isEditing = false;
   }
 
-  public function edit($id) {
-    $this->user       = User::find($id);
-    $this->name       = $this->user->name;
-    $this->email      = $this->user->email;
-    $this->password   = $this->user->password;
-    $this->isEditing  = true;
-  }
-
   public function delete($id) {
     $this->user = User::find($id);
     $this->deleteWarning = true;
@@ -211,12 +203,6 @@ new class extends Component {
                   </td>
                 @endforeach
                 <td>
-                  <x-button
-                    value="Editar"
-                    icon="icon-[line-md--edit-twotone] size-4"
-                    class="btn btn-primary btn-sm"
-                    wire:click="edit({{ $u->id }})"
-                    />
                   <x-button
                     value="Eliminar"
                     icon="icon-[line-md--account-remove] size-4"

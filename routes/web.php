@@ -22,14 +22,15 @@ Volt::route('/register', 'register')->name('register');
 // Protected routes here
 Route::middleware('auth')->group(function () {
   Volt::route('/dashboard', 'users.index')->name('dashboard');
+  Volt::route('/users/', 'users.index')->name('users.index');
+  Volt::route('/user/{user?}', 'users.show')->name('user.show');
+
   Volt::route('/proyecto/{proyecto?}', 'dashboard')->name('proyecto.show');
 
   Volt::route('/tarea/create', 'tarea.create')->name('tarea.create');
   Volt::route('/tarea/{tarea}', 'tarea.show')->name('tarea.show');
   Volt::route('/tarea/{tarea}/edit', 'tarea.show')->name('tarea.edit');
 
-  Volt::route('/users/', 'users.index')->name('users.index');
-  Volt::route('/user/{user?}', 'users.show')->name('user.show');
 });
 
 // Volt::route('/test/{proyecto}/{tarea?}', 'test');
