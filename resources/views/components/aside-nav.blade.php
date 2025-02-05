@@ -2,22 +2,22 @@
   $opciones = [
     'dashboard' => [
       'link' => route('dashboard'),
-      'icon' => 'icon-[fluent-color--home-16]',
+      'icon' => 'icon-[line-md--gauge-loop]',
       'text' => 'Dashboard',
     ],
-    'proyectos' => [
-      'link' => '#',
-      'icon' => 'icon-[fluent-color--molecule-16]',
-      'text' => 'Proyectos',
-    ],
-    'personal' => [
-      'link' => route('users.index'),
-      'icon' => 'icon-[fluent-color--people-community-16]',
-      'text' => 'Personal',
+    // 'proyectos' => [
+    //   'link' => '#',
+    //   'icon' => 'icon-[fluent-color--molecule-16]',
+    //   'text' => 'Proyectos',
+    // ],
+    'Tareas' => [
+      'link' => route('proyecto.show'),
+      'icon' => 'icon-[line-md--check-list-3-filled]',
+      'text' => 'Tareas',
     ],
     'calendario' => [
       'link' => '#',
-      'icon' => 'icon-[fluent-color--calendar-16]',
+      'icon' => 'icon-[line-md--text-box-twotone-to-text-box-multiple-twotone-transition]',
       'text' => 'Calendario',
     ],
   ];
