@@ -54,7 +54,6 @@ new class extends Component {
     $this->user->delete();
     $this->users = User::orderBy('name')->get();
     $this->deleteWarning = false;
-
   }
 }; ?>
 
@@ -170,10 +169,10 @@ new class extends Component {
         x-show="!isEditing && !deleteWarning"
         x-cloak
         >
-        <table class="table table-sm table-pin-rows table-pin-cols">
+        <table class="table table-sm table-pin-rows">
           <thead>
             <tr>
-              <th class="w-8"></th>
+              {{-- <th class="w-8"></th> --}}
               <td>Nombre</td>
               @foreach ($estados as $e)
                 <td class="text-center">
@@ -182,13 +181,12 @@ new class extends Component {
                   </span>
                 </td>
               @endforeach
-              <td>Acciones</td>
             </tr>
           </thead>
           <tbody>
             @foreach ($users as $u)
               <tr class="hover">
-                <th class="w-8">{{ $u->id }}</th>
+                {{-- <th class="w-8">{{ $u->id }}</th> --}}
                 <td>
                   <a
                     class="link link-primary"
@@ -203,14 +201,6 @@ new class extends Component {
                     {{ $u->tareasAsignadas()->where('estado', $e['id'])->count() ?: 0 }}
                   </td>
                 @endforeach
-                <td>
-                  <x-button
-                    value="Eliminar"
-                    icon="icon-[line-md--account-remove] size-4"
-                    class="btn btn-error btn-sm"
-                    wire:click="delete({{ $u->id }})"
-                    />
-                </td>
               </tr>
             @endforeach
           </tbody>
