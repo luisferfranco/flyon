@@ -3,7 +3,7 @@
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 
-Volt::route('/', 'index');
+Volt::route('/', 'login');
 Route::get('/ui', function () {
   return view('ui');
 });

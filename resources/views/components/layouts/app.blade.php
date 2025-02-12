@@ -83,7 +83,6 @@
         {{-- Login y Register --}}
         <div class="flex gap-4">
           <a href="{{ route('login') }}" class="btn btn-sm btn-primary">Login</a>
-          <a href="{{ route('register') }}" class="btn btn-sm btn-secondary">Register</a>
         </div>
       @endauth
     </div>
@@ -91,8 +90,10 @@
 
 
   <div class="flex">
+    @auth
     {{-- Aside --}}
-    <x-aside-nav />
+      <x-aside-nav />
+    @endauth
 
     {{-- Main --}}
     <div class="w-full p-6 mx-auto max-w-7xl">
