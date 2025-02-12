@@ -54,6 +54,7 @@ new class extends Component {
     $this->user->delete();
     $this->users = User::orderBy('name')->get();
     $this->deleteWarning = false;
+
   }
 }; ?>
 
