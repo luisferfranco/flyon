@@ -1,7 +1,7 @@
 @props(['tareas'])
 
-<section class="overflow-x-auto h-3/5">
-  <table class="table table-pin-rows table-pin-cols">
+<section class="overflow-x-auto">
+  <table class="table table-pin-rows">
     <thead>
       <tr>
         <th></th>
@@ -11,7 +11,6 @@
         <td>Asignado</td>
         <td>Fecha Compromiso</td>
         <td></td>
-        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -20,8 +19,8 @@
           <th>{{ $tarea->id }}</th>
 
           {{-- Asunto/Descripción --}}
-          <td class="max-w-96">
-            <div>
+          <td>
+            <div class="max-w-96 text-wrap">
               @for ($i = 0; $i < $tarea->nivel; $i++)
                 &nbsp;&nbsp;&nbsp;&nbsp;
               @endfor
@@ -99,21 +98,8 @@
               </a>
             </div>
           </td>
-          <th>{{ $tarea->id }}</th>
         </tr>
       @endforeach
     </tbody>
-    <tfoot>
-      <tr>
-        <th></th>
-        <td>Asunto</td>
-        <td>Estado</td>
-        <td>Prioridad</td>
-        <td>Asignado</td>
-        <td>Fecha Compromiso</td>
-        <td></td>
-        <th></th>
-      </tr>
-    </tfoot>
   </table>
 </section>
