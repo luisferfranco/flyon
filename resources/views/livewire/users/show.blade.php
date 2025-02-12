@@ -71,7 +71,7 @@ new class extends Component {
     >
     {{-- Despliegue de los datos del usuario --}}
     <div
-      class="rounded-lg card-body bg-info text-info-content"
+      class="rounded-lg card-body bg-base-100"
       x-show="!isEditing"
       >
       <div class="flex items-end gap-2">
@@ -164,6 +164,7 @@ new class extends Component {
             />
         </div>
       </div>
+    </form>
 
   </div>
 

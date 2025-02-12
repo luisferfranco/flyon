@@ -31,13 +31,15 @@
             <tr class="hover">
               <th class="py-4 md:py-1">{{ $tarea->id }}</th>
               <td>
-                <a
-                  href="{{ route('tarea.show', $tarea->id) }}"
-                  class="link link-accent"
-                  wire:navigate
-                  >
-                  {{ $tarea->asunto }}
-                </a>
+                <div class="text-wrap">
+                  <a
+                    href="{{ route('tarea.show', $tarea->id) }}"
+                    class="link link-accent text-ellipsis"
+                    wire:navigate
+                    >
+                    {{ $tarea->asunto }}
+                  </a>
+                </div>
               </td>
               <td>
                 @php
