@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
   Volt::route('/users/', 'users.index')->name('users.index');
   Volt::route('/user/{user?}', 'users.show')->name('user.show');
 
+  Volt::route('/proyectos/', 'proyectos.index')->name('proyectos.index');
   Volt::route('/proyecto/{proyecto?}', 'proyectos.show')->name('proyecto.show');
 
   Volt::route('/tarea/create', 'tarea.create')->name('tarea.create');

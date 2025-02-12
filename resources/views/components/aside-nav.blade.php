@@ -5,11 +5,11 @@
       'icon' => 'icon-[line-md--gauge-loop]',
       'text' => 'Dashboard',
     ],
-    // 'proyectos' => [
-    //   'link' => '#',
-    //   'icon' => 'icon-[fluent-color--molecule-16]',
-    //   'text' => 'Proyectos',
-    // ],
+    'proyectos' => [
+      'link' => route('proyectos.index'),
+      'icon' => 'icon-[fluent-color--molecule-16]',
+      'text' => 'Proyectos',
+    ],
     'Tareas' => [
       'link' => route('proyecto.show'),
       'icon' => 'icon-[line-md--check-list-3-filled]',
