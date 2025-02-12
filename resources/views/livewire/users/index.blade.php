@@ -165,7 +165,7 @@ new class extends Component {
       </div>
 
       <div
-        class="h-56 overflow-x-auto"
+        class="overflow-x-auto"
         x-show="!isEditing && !deleteWarning"
         x-cloak
         >
