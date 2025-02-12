@@ -9,6 +9,7 @@ new class extends Component {
   public $isEditing = false;
 
   public $accion;
+  public $texto;
   public $acciones = [];
 
   public function mount() {
@@ -18,34 +19,39 @@ new class extends Component {
   }
 
   public function crearAccion() {
-    $this->accion = "";
+    $this->texto = "";
+    $this->accion = new Accion();
     $this->isEditing = true;
-    $this->acciones = Accion::where('tarea_id', $this->tarea->id)
-      ->orderBy('created_at')
-      ->get();
   }
 
   public function cancelar() {
     $this->isEditing = false;
   }
 
+  public function editar($id) {
+    $this->accion = Accion::find($id);
+    $this->texto = $this->accion->descripcion;
+    $this->isEditing = true;
+  }
+
   public function guardar() {
     $this->validate([
-      'accion' => 'required'
+      'texto' => 'required'
     ]);
 
-    $this->tarea->acciones()->create([
-      'descripcion' => $this->accion,
-      'user_id'     => auth()->id()
-    ]);
-
-    $this->accion = "";
+    $this->accion->user_id = auth()->id();
+    $this->accion->descripcion = $this->texto;
+    $this->accion->save();
+    $this->texto = "";
     $this->isEditing = false;
+    $this->acciones = Accion::where('tarea_id', $this->tarea->id)
+      ->orderBy('created_at')
+      ->get();
   }
 }; ?>
 
 <div>
-  {{-- Crear una nueva tarea --}}
+  {{-- Crear/Editar una nueva Acción --}}
   <section x-data="{ isEditing: $wire.entangle('isEditing') }">
     <x-button
       value="Nueva Acción"
@@ -62,8 +68,8 @@ new class extends Component {
         >
         <x-textarea
           label="Acción"
-          wire:model="accion"
-          name="accion"
+          wire:model="texto"
+          name="texto"
           rows="10"
           />
         <div class="mt-4">
@@ -82,18 +88,29 @@ new class extends Component {
             />
         </div>
       </form>
-
   </section>
 
   {{-- Listado de acciones --}}
-  <section class="mt-4">
+  <section class="mt-4 space-y-4">
     @if ($tarea->acciones->count() > 0)
       @foreach ($tarea->acciones as $accion)
-        <div class="mb-4 overflow-hidden border shadow-md rounded-xl border-neutral bg-base-200">
-          <div class="px-6 py-2 bg-base-300">
-            Actualizado por {{ $accion->user->name }} el {{ $accion->created_at->format('Y/m/d') }}
+        <div class="card bg-base-200">
+          <div class="flex items-center justify-between alert alert-neutral">
+            <p>
+              Actualizado por <a href="{{ route('user.show', $accion->user->id) }}" class="link link-primary"><span class="font-bold">{{ $accion->user->name }}</span></a> el {{ $accion->created_at->format('Y/m/d') }}
+            </p>
+            <div>
+              <x-button
+                wire:click="editar({{ $accion->id }})"
+                class="btn btn-info btn-sm"
+                icon="icon-[tabler--edit]"
+                value="Editar"
+              />
+            </div>
           </div>
-          <div class="px-6 py-2 markdown">{!! Str::of($accion->descripcion)->markdown() !!}</div>
+          <div class="card-body">
+            <div class="px-6 py-2 markdown">{!! Str::of($accion->descripcion)->markdown() !!}</div>
+          </div>
         </div>
       @endforeach
     @else
