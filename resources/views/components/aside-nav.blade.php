@@ -5,6 +5,11 @@
       'icon' => 'icon-[line-md--gauge-loop]',
       'text' => 'Dashboard',
     ],
+    'usuarios' => [
+      'link' => route('users.index'),
+      'icon' => 'icon-[line-md--account]',
+      'text' => 'Usuarios',
+    ],
     'proyectos' => [
       'link' => route('proyectos.index'),
       'icon' => 'icon-[fluent-color--molecule-16]',

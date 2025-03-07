@@ -23,7 +23,7 @@ Route::get('/logout', function () {
 
 // Protected routes here
 Route::middleware('auth')->group(function () {
-  Volt::route('/dashboard', 'users.index')->name('dashboard');
+  Volt::route('/dashboard', 'proyectos.index')->name('dashboard');
   Volt::route('/users/', 'users.index')->name('users.index');
   Volt::route('/user/{user?}', 'users.show')->name('user.show');
 
